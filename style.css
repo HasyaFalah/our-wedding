@@ -1,0 +1,301 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root{
+  
+    --ink:        #4A1623;   /* deep burgundy */
+    --ink-soft:   #5E2230;
+    --ivory:      #F7EFE3;   /* warm beige paper */
+    --ivory-dim:  #EBDDC9;   /* deeper beige for cards */
+    --gold:       #9A7233;   /* antique gold (a bit darker so small text stays readable) */
+    --gold-light: #D9BE8A;
+    --sage:       #8A6A5A;   /* muted cocoa, used for small labels */
+    --blush:      #E3C8B8;
+    --line:       rgba(169,129,74,0.35);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body:    'Jost', sans-serif;
+  --font-script:  'Mrs Saint Delafield', cursive;
+  --font-cover: 'Cinzel', serif;
+
+  --container: 480px; /* mobile-first "card" width, centers on desktop */
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Desktop presentation: center the mobile-width invitation like a physical card */
+#app{
+  max-width: var(--container);
+  margin: 0 auto;
+  background: var(--ivory);
+  position: relative;
+  min-height: 100vh;
+  box-shadow: 0 0 60px rgba(0,0,0,0.35);
+}
+
+section{ position: relative; padding: 88px 28px; overflow: hidden; }
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: 14px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 14px;
+}
+h1,h2,h3{ font-family: var(--font-display); font-weight: 500; color: var(--ink); }
+p{ line-height: 1.7; color: var(--ink-soft); font-weight: 300; }
+
+/* fade-in-on-scroll */
+.reveal{ opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.is-visible{ opacity: 1; transform: translateY(0); }
+
+/* ---- signature element: botanical wreath divider ---- */
+.wreath-divider{ display:flex; justify-content:center; margin: 22px 0; }
+.wreath-divider svg{ width: 92px; height: auto; opacity: 0.85; }
+
+/* ============================================================
+   COVER
+   ============================================================ */
+#cover{
+  min-height: 100vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+  padding: 40px 24px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(154,114,51,0.10), transparent 60%),
+    var(--ivory);
+}
+.cover-frame{
+  position:absolute; inset: 16px;
+  border: 1px solid var(--line);
+  pointer-events:none;
+}
+.cover-frame::before, .cover-frame::after{
+  content:''; position:absolute; width:34px; height:34px;
+  border: 1px solid var(--gold);
+}
+.cover-frame::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+.cover-frame::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+.cover-eyebrow{ font-size:14px; letter-spacing:.4em; text-transform:uppercase; color:var(--sage); margin-bottom: 28px;}
+.cover-guest-label{ font-size: 13px; color: var(--ink-soft); letter-spacing:.05em; margin-bottom:6px; font-weight:300;}
+.cover-guest-name{ font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--gold); margin-bottom: 34px; }
+
+.cover-names{ display:flex; flex-direction:column; align-items:center; gap: 6px; margin: 10px 0 18px;}
+.cover-names .name{ font-size: 52px; line-height:1; color: var(--ink); letter-spacing: 0.01em;}
+.cover-names .name{ white-space: pre-line; }
+.cover-names .name{
+  font-family: var(--font-cover);
+  white-space: pre-line;
+}
+.cover-amp{ font-family: var(--font-cover); font-size: 46px; color: var(--gold); margin: 8px 0; }
+
+.cover-date{
+  font-family: var(--font-body); font-size:13px; letter-spacing:.25em; text-transform:uppercase; white-space: pre-line;
+  color: var(--ink-soft); margin-top: 22px; padding-top:18px; border-top: 1px solid var(--line); width: 90%;
+}
+.scroll-cue{
+  margin-top: 46px; font-size: 8px; letter-spacing:.3em; text-transform:uppercase; color: var(--sage);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+}
+.scroll-cue .stem{ width:1px; height: 30px; background: linear-gradient(var(--gold), transparent); animation: stemPulse 2s ease-in-out infinite; }
+@keyframes stemPulse{ 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* ============================================================
+   COUPLE SECTION
+   ============================================================ */
+#couple{ background: var(--ivory); text-align:center; }
+.couple-intro{ max-width: 340px; margin: 0 auto 46px; text-align:center; }
+
+.person{ margin-bottom: 56px; }
+.person:last-child{ margin-bottom: 0; }
+.portrait{
+  width: 148px; height: 148px; border-radius: 50%;
+  margin: 0 auto 20px;
+  background: linear-gradient(160deg, var(--blush), var(--ivory-dim));
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  border: 1px solid var(--line);
+}
+.portrait::before{
+  content:''; position:absolute; inset:-8px; border: 1px solid var(--gold-light); border-radius:50%;
+}
+.portrait img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.portrait-placeholder{ font-family: var(--font-display); font-style:italic; color: var(--gold); font-size:13px; }
+
+.person h3{ font-size: 30px; margin-bottom: 6px; white-space: pre-line;}
+.person .parents{ font-size: 13px; color: var(--sage); font-weight:400; letter-spacing:.02em; }
+
+/* ============================================================
+   COUNTDOWN
+   ============================================================ */
+#countdown{ background: var(--ink); text-align:center; }
+#countdown .eyebrow{ color: var(--gold-light); }
+#countdown h2{ color: var(--ivory); margin-bottom: 8px; }
+#countdown p.sub{ color: var(--blush); max-width: 300px; margin: 0 auto 40px; }
+
+.countdown-grid{ display:flex; justify-content:center; gap: 12px; }
+.cd-cell{
+  flex:1; max-width: 78px;
+  background: var(--ink-soft);
+  border: 1px solid rgba(216,190,140,0.25);
+  border-radius: 6px;
+  padding: 16px 6px;
+}
+.cd-num{ font-family: var(--font-display); font-size: 32px; color: var(--gold-light); font-variant-numeric: tabular-nums; }
+.cd-label{ font-size: 9.5px; letter-spacing:.2em; text-transform:uppercase; color: var(--sage); margin-top:6px; }
+
+/* ============================================================
+   EVENT DETAILS
+   ============================================================ */
+#event{ background: var(--ivory); }
+.event-card{
+  border: 1px solid var(--line); border-radius: 4px; padding: 30px 24px; margin-bottom: 22px; text-align:center;
+  background: var(--ivory-dim);
+}
+.event-card:last-child{ margin-bottom:0; }
+.event-card .kind{ font-family: var(--font-script); font-size: 30px; color: var(--gold); margin-bottom: 4px;}
+.event-card .datetime{ font-size: 15px; color: var(--ink); margin-bottom: 4px; font-weight:500; white-space: pre-line;}
+.event-card .venue-name{ font-size: 13px; color: var(--sage); margin-bottom: 18px; }
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family: var(--font-body); font-size: 12px; letter-spacing:.12em; text-transform:uppercase;
+  color: var(--ivory); background: var(--ink); border: 1px solid var(--ink);
+  padding: 12px 22px; border-radius: 2px; text-decoration:none; cursor:pointer;
+  transition: all .25s ease;
+}
+.btn:hover{ background: transparent; color: var(--gold-light); }
+.btn.btn-outline{ background: transparent; color: var(--ink); }
+.btn.btn-outline:hover{ background: var(--ink); color: var(--ivory); }
+.btn-row{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+
+/* ============================================================
+   MAP
+   ============================================================ */
+#map{ background: var(--ink); text-align:center; }
+#map .eyebrow{ color: var(--gold-light); }
+#map h2{ color: var(--ivory); }
+#map p{ color: var(--blush); max-width: 320px; margin: 10px auto 26px; }
+.map-frame{
+  border: 1px solid rgba(216,190,140,0.3); border-radius: 6px; overflow:hidden; margin-bottom: 24px; height: 200px;
+  background: repeating-linear-gradient(135deg, var(--ink-soft), var(--ink-soft) 10px, #3E1520 10px, #3E1520 20px);
+  display:flex; align-items:center; justify-content:center;
+}
+.map-frame span{ font-size: 12px; color: var(--sage); letter-spacing:.1em; text-transform:uppercase; }
+.map-frame a{ display:block; width:100%; height:100%; }
+
+/* ============================================================
+   RSVP
+   ============================================================ */
+#rsvp{ background: var(--ivory); }
+form{ display:flex; flex-direction:column; gap: 16px; margin-top: 34px; }
+.field label{ display:block; font-size: 11px; letter-spacing:.15em; text-transform:uppercase; color: var(--sage); margin-bottom: 8px; }
+.field input, .field select, .field textarea{
+  width:100%; font-family: var(--font-body); font-size: 15px; color: var(--ink);
+  background: transparent; border: none; border-bottom: 1px solid var(--line);
+  padding: 8px 2px; outline:none; transition: border-color .2s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--gold); }
+.field textarea{ resize: vertical; min-height: 80px; font-family: var(--font-body); }
+.radio-group{ display:flex; gap: 10px; }
+.radio-option{
+  flex:1; text-align:center; border: 1px solid var(--line); border-radius: 3px; padding: 12px 8px;
+  font-size: 13px; cursor:pointer; transition: all .2s ease; color: var(--ink-soft);
+}
+.radio-option input{ display:none; }
+.radio-option.active{ background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.submit-row{ margin-top: 8px; }
+.submit-row .btn{ width:100%; justify-content:center; }
+.form-msg{ font-size: 13px; text-align:center; margin-top: 4px; min-height: 18px; }
+.form-msg.success{ color: var(--sage); }
+.form-msg.error{ color: #A85A4A; }
+
+/* ============================================================
+   WISHES
+   ============================================================ */
+#wishes{ background: var(--ivory-dim); }
+.wishes-list{ display:flex; flex-direction:column; gap:14px; margin-top: 32px; max-height: 420px; overflow-y:auto; padding-right:4px; }
+.wish-card{
+  background: var(--ivory); border: 1px solid var(--line); border-radius: 4px; padding: 16px 18px;
+}
+.wish-card .wish-name{ font-family: var(--font-display); font-size: 17px; color: var(--gold); margin-bottom: 4px; }
+.wish-card .wish-text{ font-size: 14px; color: var(--ink-soft); font-style: italic; line-height:1.6; }
+.wishes-empty{ text-align:center; font-size: 13px; color: var(--sage); padding: 20px 0; }
+.wishes-refresh{ display:block; margin: 18px auto 0; background:none; border:none; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color: var(--gold); cursor:pointer; }
+
+/* ============================================================
+   GIFT
+   ============================================================ */
+#gift{ background: var(--ink); text-align:center; }
+#gift .eyebrow{ color: var(--gold-light); }
+#gift h2{ color: var(--ivory); }
+#gift p.sub{ color: var(--blush); max-width: 300px; margin: 10px auto 34px; }
+.gift-card{
+  border: 1px solid rgba(216,190,140,0.3); border-radius: 6px; padding: 26px 22px; margin-bottom:16px; text-align:left;
+  background: var(--ink-soft);
+}
+.gift-card .gift-label{ font-size: 10px; letter-spacing:.2em; text-transform:uppercase; color: var(--gold-light); margin-bottom:8px; }
+.gift-card .gift-value{ font-size: 16px; color: var(--ivory); font-weight:400; word-break: break-word; }
+.copy-btn{
+  margin-top: 12px; background:none; border: 1px solid var(--gold); color: var(--gold-light);
+  font-size: 11px; letter-spacing:.1em; text-transform:uppercase; padding: 7px 14px; border-radius:2px; cursor:pointer;
+}
+
+/* ============================================================
+   CLOSING
+   ============================================================ */
+#closing{
+  min-height: 70vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  background: var(--ivory);
+}
+#closing .wreath-divider svg{ width: 120px; }
+#closing .thanks-title{ font-size: 40px; margin: 14px 0 18px; }
+#closing p{ max-width: 300px; margin: 0 auto 30px; }
+#closing .signoff{ font-family: var(--font-script); font-size: 34px; color: var(--gold); }
+
+/* ============================================================
+   FLOATING MUSIC BUTTON
+   ============================================================ */
+#music-toggle{
+  position: fixed; bottom: 22px; right: calc(50% - min(50%, var(--container) / 2) + 22px);
+  width: 46px; height: 46px; border-radius: 50%; z-index: 40;
+  background: var(--ink); border: 1px solid var(--gold-light);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+#music-toggle svg{ width: 18px; height: 18px; }
+#music-toggle .disc{ animation: spin 5s linear infinite; animation-play-state: paused; }
+#music-toggle.playing .disc{ animation-play-state: running; }
+
+@keyframes spin{ from{ transform: rotate(0deg);} to{ transform: rotate(360deg);} }
+
+/* ============================================================
+   OPENING GATE (tap to open envelope)
+   ============================================================ */
+#gate{
+  position: fixed; inset:0; z-index: 100; background: var(--ivory);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  padding: 24px; transition: opacity .8s ease, visibility .8s ease;
+}
+#gate.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+#gate .gate-eyebrow{ font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--sage); margin-bottom:20px; }
+#gate .gate-names{ font-family: var(--font-display); font-size: 34px; margin-bottom: 10px; }
+#gate .gate-guest{ font-family: var(--font-display); font-style: italic; color: var(--gold); font-size: 18px; margin-bottom: 34px; }
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ transition: none; }
+  .stem, .disc{ animation: none !important; }
+}
+
+@media (min-width: 540px){
+  body{ background: var(--ink-soft); }
+}
