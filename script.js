@@ -82,6 +82,7 @@ document.body.style.overflow = 'hidden'; // lock scroll until gate opens
    ================================================================ */
 const musicBtn = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
+bgMusic.volume = 0.2;
 musicBtn.addEventListener('click', () => {
   if (bgMusic.paused) {
     bgMusic.play();
